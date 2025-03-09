@@ -1,78 +1,65 @@
+.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Shop - Emily's Fashion Collections</title>
-  <!-- Bootstrap CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Emily's Fashion Collections - Shop trendy and affordable fashion pieces">
+  <title>Shop | Emily's Fashion Collections</title>
+  
+  <!-- Core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-  <!-- Font Awesome for Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Custom pagination + product styles -->
+  
+  <!-- Custom Styles -->
   <style>
-    /* Pagination styles */
-    .custom-pagination .page-link {
-      color: #6a1b9a;
-      border-color: #e0e0e0;
-      background-color: white;
-      transition: all 0.3s ease;
+    :root {
+      --primary: #6a1b9a;
+      --primary-dark: #4a148c;
+      --accent: #d4af37;
+      --light-bg: #f8f9fa;
+      --text-dark: #212529;
+      --text-light: #f8f9fa;
+      --border-light: rgba(0, 0, 0, 0.1);
     }
-
-    .custom-pagination .page-item.active .page-link {
-      background-color: #6a1b9a;
-      border-color: #6a1b9a;
-      color: white;
-    }
-
-    .custom-pagination .page-link:hover:not(.active) {
-      background-color: #f0e6f5;
-      color: #6a1b9a;
-    }
-
-    .custom-pagination .page-item.disabled .page-link {
-      color: #aaa;
-      background-color: #f8f9fa;
-      border-color: #e0e0e0;
-    }
-
-    .custom-pagination .page-link:focus {
-      box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
-    }
-
-    /* Product card improvements */
-    .product-card {
-      transition: all 0.3s ease-out;
-      height: 100%;
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    /* Navbar */
+    .navbar-brand img {
+      height: 40px;
+    }
+    
+    /* Product Cards */
+    .product-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
       border-radius: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-light);
       overflow: hidden;
     }
-
+    
     .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 20px rgba(106, 27, 154, 0.15) !important;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(106, 27, 154, 0.15);
     }
-
+    
     .product-image-container {
       position: relative;
       padding-top: 125%;
-      /* Maintains aspect ratio */
       overflow: hidden;
+      background-color: #f5f5f5;
     }
-
+    
     .product-image-container img {
       position: absolute;
       top: 0;
@@ -80,127 +67,121 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.4s;
     }
-
-    .card-body {
-      padding: 1rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+    
+    .product-card:hover .product-image-container img {
+      transform: scale(1.05);
     }
-
+    
     .card-title {
       font-size: 0.95rem;
       font-weight: 500;
-      margin-bottom: 0.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      height: auto;
       min-height: 40px;
     }
-
+    
     .card-text {
       font-weight: 600;
-      color: var(--purple-primary);
-      font-size: 1rem;
+      color: var(--primary);
     }
-
-    .btn-primary.mt-auto {
-      margin-top: auto;
-      background-color: var(--purple-primary);
+    
+    .btn-primary {
+      background-color: var(--primary);
       border: none;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s;
     }
-
-    .btn-primary.mt-auto:hover {
-      background-color: var(--purple-dark);
-      transform: translateY(-2px);
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
     }
-
-    @keyframes staggerFade {
+    
+    /* Pagination */
+    .custom-pagination .page-link {
+      color: var(--primary);
+      border-color: #e0e0e0;
+      background-color: white;
+      transition: all 0.3s;
+    }
+    
+    .custom-pagination .page-item.active .page-link {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    
+    .custom-pagination .page-link:hover:not(.active) {
+      background-color: #f0e6f5;
+    }
+    
+    /* Footer */
+    .bg-purple {
+      background-color: var(--primary);
+    }
+    
+    .gold-divider {
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent);
+      margin: 1rem auto;
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .footer-links a, .social-icon {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    
+    .footer-links a:hover, .social-icon:hover {
+      opacity: 0.8;
+      color: var(--accent);
+    }
+    
+    .social-icon {
+      font-size: 1.2rem;
+      margin-right: 12px;
+    }
+    
+    .btn-gold {
+      background-color: var(--accent);
+      border: none;
+      color: var(--text-dark);
+    }
+    
+    /* Animations */
+    .product-stagger {
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-
-    .bg-purple {
-      background-color: #6a1b9a !important;
-    }
-
-    .text-gold {
-      color: #d4af37 !important;
-    }
-
-    .btn-gold {
-      background-color: #d4af37;
-      border: none;
-      color: #fff;
-    }
-
-    .gold-divider {
-      width: 60px;
-      height: 3px;
-      background-color: #d4af37;
-    }
-
-    .footer-heading {
-      font-weight: 600;
-    }
-
-    .footer-links {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .footer-links li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .footer-links li a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-text {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .social-icon {
-      display: inline-block;
-      margin-right: 8px;
-      font-size: 16px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .social-icon:hover {
-      opacity: 0.8;
-    }
-
-    .logo {
-      max-height: 40px;
-      margin-right: 8px;
-    }
   </style>
 </head>
 
 <body>
-  <!-- HEADER / NAVBAR -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="main.html" aria-label="Emily's Fashion Collections">
-        <img src="../images/logo.png" alt="Emily's Fashion Collections Logo" class="logo" />
+      <a class="navbar-brand" href="main.html">
+        <img src="../images/logo.png" alt="Emily's Fashion Collections Logo">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -210,38 +191,31 @@
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="main.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Shop
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="shop.html">All Products</a></li>
-              <!-- Additional categories can go here -->
-            </ul>
-          </li>
+          <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- MAIN CONTENT: PRODUCTS GALLERY -->
+  <!-- Main Content -->
   <section class="container py-5">
-    <h1 class="mb-4 reveal">Our Products</h1>
+    <h1 class="mb-4">Our Collection</h1>
 
-    <!-- Filter Section -->
-    <div class="filter-container mb-4 reveal delay-1">
+    <!-- Filter Controls -->
+    <div class="mb-4">
       <div class="row g-2">
         <div class="col-md-6 mb-2">
           <div class="input-group">
             <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
-            <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+            <button class="btn btn-primary" type="button" id="searchButton">
+              <i class="fas fa-search"></i>
+            </button>
           </div>
         </div>
         <div class="col-md-6 mb-2">
           <div class="d-flex justify-content-md-end">
-            <select class="form-select" id="sortProducts" style="max-width: 100%;">
+            <select class="form-select" id="sortProducts" style="max-width: 200px;">
               <option value="default">Sort by</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
@@ -253,415 +227,15 @@
     </div>
 
     <!-- Products Grid -->
-    <div class="row g-3">
-
-      <!-- Product Item 1 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7ras9-m5z2m6t6rtz61f.webp" alt="Product 1"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7ras9-m5z2m6t6rtz61f.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Red Puff-Sleeve Dress</h5>
-            <p class="card-text mb-3">₱250.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.24140976195" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 2 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasc-m5rz10gjsvimd0.webp" alt="Product 2"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasc-m5rz10gjsvimd0.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Pink Floral Dress</h5>
-            <p class="card-text mb-3">₱250.00</p>
-            <a href="https://shopee.ph/PremiumDressLiveSellingOnly-i.194049369.25941175306" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 3 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286c9xf81.webp" alt="Product 3"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286c9xf81.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Black Bodycon Dress</h5>
-            <p class="card-text mb-3">₱99.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.29524912923" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 4 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5zgyb54jszya8.webp" alt="Product 4"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5zgyb54jszya8.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Pink Tie Dress</h5>
-            <p class="card-text mb-3">₱99.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.26674965367" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 5 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286dohv46.webp" alt="Product 5"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286dohv46.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Black Fringe Dress</h5>
-            <p class="card-text mb-3">₱99.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.29524912923" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 6 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtyhkya6.webp" alt="Product 6"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtyhkya6.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Colorblock Bodycon Dress</h5>
-            <p class="card-text mb-3">₱230.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.27824922172" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 7 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q39286avcz0e.webp" alt="Product 7"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q39286avcz0e.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Striped Sleeveless Dress</h5>
-            <p class="card-text mb-3">₱799.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.28974917782" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 8 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m0iv90xxgnzi28.webp" alt="Product 8"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m0iv90xxgnzi28.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Floral Maxi Dress</h5>
-            <p class="card-text mb-3">₱299.00</p>
-            <a href="https://shopee.ph/Maxi-Dress-(S-M-L)-Live-Selling-i.194049369.24386373011" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 9 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rask-m5q12ogtsvb6a6.webp" alt="Product 9"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rask-m5q12ogtsvb6a6.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Striped Midi Dress</h5>
-            <p class="card-text mb-3">₱150.00</p>
-            <a href="https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.24190981216" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 10 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m6k027dyy9e393.webp" alt="Product 10"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m6k027dyy9e393.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Blue Button-Down Dress</h5>
-            <p class="card-text mb-3">₱1,256.00</p>
-            <a href="https://shopee.ph/PremiumDressliveSelling-i.194049369.28777105809" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 11 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m62s54nfab2m58.webp" alt="Product 11"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m62s54nfab2m58.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Pastel Chiffon Dress</h5>
-            <p class="card-text mb-3">₱497.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.28525751171" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 12 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m5q12ogtu9vm55.webp" alt="Product 12"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m5q12ogtu9vm55.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Beige Casual Dress</h5>
-            <p class="card-text mb-3">₱230.00</p>
-            <a href="https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.26724922188" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 13 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q12ogtzw5e5a.webp" alt="Product 13"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q12ogtzw5e5a.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Striped Bodycon Dress</h5>
-            <p class="card-text mb-3">₱250.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.28074917635" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 14 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasb-m5q39286ghmr33.webp" alt="Product 14"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasb-m5q39286ghmr33.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Striped T-Shirt Dress</h5>
-            <p class="card-text mb-3">₱230.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.29924907979" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 15 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5rz10gjrgy615.webp" alt="Product 15"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5rz10gjrgy615.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Collared Bodycon Dress</h5>
-            <p class="card-text mb-3">₱680.00</p>
-            <a href="https://shopee.ph/Maxisilkdressliveselling-i.194049369.26824964214" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 16 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5rz10gjonta71.webp" alt="Product 16"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5rz10gjonta71.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Floral Mesh Dress</h5>
-            <p class="card-text mb-3">₱2,488.00</p>
-            <a href="https://shopee.ph/PremiumdressLiveSelling-i.194049369.29874963893" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 17 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasj-m5rz10gjua3259.webp" alt="Product 17"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasj-m5rz10gjua3259.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Printed A-Line Dress</h5>
-            <p class="card-text mb-3">₱1,709.00</p>
-            <a href="https://shopee.ph/MaxiDressLiveSelling-i.194049369.29274976057" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 18 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtq26a15.webp" alt="Product 18"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtq26a15.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Casual Midi Dress</h5>
-            <p class="card-text mb-3">₱560.00</p>
-            <a href="https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.29574921974" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 19 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5q12ogtrgqq73.webp" alt="Product 19"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5q12ogtrgqq73.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Pink Spaghetti Dress</h5>
-            <p class="card-text mb-3">₱810.00</p>
-            <a href="https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.25440980427" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Item 20 -->
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card product-frame h-100">
-          <div class="product-image-container">
-            <img src="https://down-ph.img.susercontent.com/file/ph-11134207-7r98y-ltjfmxfqn5hf5b.webp" alt="Product 20"
-              class="card-img-top" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-              data-bs-image="https://down-ph.img.susercontent.com/file/ph-11134207-7r98y-ltjfmxfqn5hf5b.webp"
-              loading="lazy" />
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Floral Maxi Dress</h5>
-            <p class="card-text mb-3">₱4,249.00</p>
-            <a href="https://shopee.ph/Maxi-Dress-(S-M-L)-Live-Selling-i.194049369.5046702521" target="_blank"
-              class="btn btn-primary mt-auto">
-              Buy on Shopee
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div> <!-- End .row -->
+    <div class="row g-3" id="productsGrid">
+      <!-- Products will be loaded from JS -->
+    </div>
 
     <!-- Pagination -->
-    <nav aria-label="Product pagination" class="container mb-5 reveal delay-3">
+    <nav aria-label="Product pagination" class="container mb-5 mt-4">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <div>
-          <span id="showing-products">Showing 1-8 of 20 products</span>
+          <span id="showing-products">Showing products</span>
         </div>
         <div>
           <label for="itemsPerPage">Items per page:</label>
@@ -679,7 +253,7 @@
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <!-- Page numbers get appended here by JS -->
+        <!-- Page numbers inserted by JS -->
         <li class="page-item">
           <a class="page-link" href="#" aria-label="Next" id="next-page">
             <span aria-hidden="true">&raquo;</span>
@@ -689,128 +263,265 @@
     </nav>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-purple text-white py-5 mt-auto reveal">
+  <!-- Footer -->
+  <footer class="bg-purple text-white py-5 mt-auto">
     <div class="container">
-      <!-- Footer Top: Logo and Tagline -->
-      <div class="footer-top text-center mb-4">
+      <div class="text-center mb-4">
         <h3 class="mb-2">Emily's Fashion Collections</h3>
-        <p class="mb-0">Trendy and Affordable Clothes for Everyone</p>
-        <div class="gold-divider mx-auto my-4"></div>
+        <p>Trendy and Affordable Clothes for Everyone</p>
+        <div class="gold-divider"></div>
       </div>
 
-      <!-- Footer Main Content -->
       <div class="row g-4">
-        <!-- Company Info -->
         <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="footer-heading">About Us</h5>
-          <p class="footer-text">
+          <h5 class="fw-bold mb-3">About Us</h5>
+          <p class="small opacity-75">
             Emily's Fashion Collections offers curated fashion pieces that blend style, comfort, and affordability. We
             believe everyone deserves to look and feel their best.
           </p>
-          <div class="social-icons mt-3">
-            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="social-icon" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          <div class="mt-3">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
           </div>
         </div>
-        <!-- Quick Links -->
+        
         <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="footer-heading">Quick Links</h5>
+          <h5 class="fw-bold mb-3">Quick Links</h5>
           <ul class="footer-links">
-            <li><a href="main.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="https://shopee.ph/emilysamosino" target="_blank">Shopee Store</a></li>
+            <li class="mb-2"><a href="main.html">Home</a></li>
+            <li class="mb-2"><a href="about.html">About Us</a></li>
+            <li class="mb-2"><a href="shop.html">Shop</a></li>
+            <li class="mb-2"><a href="https://shopee.ph/emilysamosino" target="_blank">Shopee Store</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
-        <!-- Newsletter -->
+        
         <div class="col-md-4">
-          <h5 class="footer-heading">Stay Updated</h5>
-          <p class="footer-text">Subscribe to our newsletter for exclusive offers and updates.</p>
-          <div class="newsletter-form mt-3">
-            <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Your email address" aria-label="Email address">
+          <h5 class="fw-bold mb-3">Stay Updated</h5>
+          <p class="small opacity-75">Subscribe for exclusive offers and updates.</p>
+          <div class="mt-3">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email">
               <button class="btn btn-gold" type="button">Subscribe</button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-    <!-- Footer Bottom: Copyright & Credits -->
-    <div class="footer-bottom mt-4">
+    
+    <div class="mt-4 pt-3 border-top border-white border-opacity-25">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 text-center text-md-start">
-            <p class="mb-0">&copy; 2025 Emily's Fashion Collections. All rights reserved.</p>
+          <div class="col-md-6 text-center text-md-start small">
+            &copy; 2025 Emily's Fashion Collections. All rights reserved.
           </div>
-          <div class="col-md-6 text-center text-md-end">
-            <p class="mb-0">
-              Designed with <i class="fas fa-heart text-gold"></i> by Samosino
-            </p>
+          <div class="col-md-6 text-center text-md-end small">
+            Designed with <i class="fas fa-heart text-warning"></i> by Samosino
           </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- AOS Animation JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
   <!-- Lightbox Modal -->
   <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 bg-transparent">
-        <div class="modal-body p-0">
+        <div class="modal-body p-0 position-relative">
           <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2"
             data-bs-dismiss="modal" aria-label="Close"></button>
-          <img src="" id="lightboxImage" class="img-fluid rounded" alt="Product Full View">
+          <img src="" id="lightboxImage" class="img-fluid rounded shadow" alt="Product Full View">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Custom Scripts -->
+  <!-- Core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App JS -->
   <script>
-    // Lightbox Modal Script
-    const lightboxModal = document.getElementById('lightboxModal');
-    const lightboxImage = document.getElementById('lightboxImage');
-    if (lightboxModal) {
-      lightboxModal.addEventListener('show.bs.modal', function (event) {
-        const triggerImage = event.relatedTarget;
-        const imgSrc = triggerImage.getAttribute('data-bs-image');
-        lightboxImage.src = imgSrc;
-      });
-    }
+    // Product data - in a real app this would come from an API
+    const products = [
+      {
+        id: 1,
+        name: "Red Puff-Sleeve Dress",
+        price: 250.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7ras9-m5z2m6t6rtz61f.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.24140976195"
+      },
+      {
+        id: 2,
+        name: "Pink Floral Dress",
+        price: 250.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasc-m5rz10gjsvimd0.webp",
+        link: "https://shopee.ph/PremiumDressLiveSellingOnly-i.194049369.25941175306"
+      },
+      {
+        id: 3,
+        name: "Black Bodycon Dress",
+        price: 99.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286c9xf81.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29524912923"
+      },
+      {
+        id: 4,
+        name: "Pink Tie Dress",
+        price: 99.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5zgyb54jszya8.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.26674965367"
+      },
+      {
+        id: 5,
+        name: "Black Fringe Dress",
+        price: 99.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286dohv46.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29524912923"
+      },
+      {
+        id: 6,
+        name: "Colorblock Bodycon Dress",
+        price: 230.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtyhkya6.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.27824922172"
+      },
+      {
+        id: 7,
+        name: "Striped Sleeveless Dress",
+        price: 799.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q39286avcz0e.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.28974917782"
+      },
+      {
+        id: 8,
+        name: "Floral Maxi Dress",
+        price: 299.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m0iv90xxgnzi28.webp",
+        link: "https://shopee.ph/Maxi-Dress-(S-M-L)-Live-Selling-i.194049369.24386373011"
+      },
+      {
+        id: 9,
+        name: "Striped Midi Dress",
+        price: 150.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rask-m5q12ogtsvb6a6.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.24190981216"
+      },
+      {
+        id: 10,
+        name: "Blue Button-Down Dress",
+        price: 1256.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m6k027dyy9e393.webp",
+        link: "https://shopee.ph/PremiumDressliveSelling-i.194049369.28777105809"
+      },
+      {
+        id: 11,
+        name: "Pastel Chiffon Dress",
+        price: 497.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m62s54nfab2m58.webp", 
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.28525751171"
+      },
+      {
+        id: 12,
+        name: "Beige Casual Dress",
+        price: 230.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m5q12ogtu9vm55.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.26724922188"
+      },
+      {
+        id: 13,
+        name: "Striped Bodycon Dress",
+        price: 250.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q12ogtzw5e5a.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.28074917635"
+      },
+      {
+        id: 14,
+        name: "Striped T-Shirt Dress",
+        price: 230.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasb-m5q39286ghmr33.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29924907979"
+      },
+      {
+        id: 15,
+        name: "Collared Bodycon Dress",
+        price: 680.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5rz10gjrgy615.webp",
+        link: "https://shopee.ph/Maxisilkdressliveselling-i.194049369.26824964214"
+      },
+      {
+        id: 16,
+        name: "Floral Mesh Dress",
+        price: 2488.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5rz10gjonta71.webp",
+        link: "https://shopee.ph/PremiumdressLiveSelling-i.194049369.29874963893"
+      },
+      {
+        id: 17,
+        name: "Printed A-Line Dress",
+        price: 1709.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasj-m5rz10gjua3259.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29274976057"
+      },
+      {
+        id: 18,
+        name: "Casual Midi Dress",
+        price: 560.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtq26a15.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.29574921974"
+      },
+      {
+        id: 19,
+        name: "Pink Spaghetti Dress",
+        price: 810.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5q12ogtrgqq73.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.25440980427"
+      },
+      {
+        id: 20,
+        name: "Floral Maxi Dress",
+        price: 4249.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7r98y-ltjfmxfqn5hf5b.webp",
+        link: "https://shopee.ph/Maxi-Dress-(S-M-L)-Live-Selling-i.194049369.5046702521"
+      }
+    ];
 
-    // Initialize AOS animations
-    AOS.init({
-      duration: 800,
-      once: true
-    });
+    // Format price with PHP peso
+    const formatPrice = (price) => {
+      return '₱' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    };
 
-    // Pagination + Search + Sort Script
-    document.addEventListener('DOMContentLoaded', function () {
-      // Add staggered animation to product cards
-      const productCards = document.querySelectorAll('.col-6.col-sm-6.col-md-4.col-lg-3');
-      productCards.forEach((card, index) => {
-        card.classList.add('product-stagger');
-        card.style.animationDelay = `${0.1 * index}s`;
-      });
+    // Create product card HTML
+    const createProductCard = (product, index) => {
+      const card = document.createElement('div');
+      card.className = 'col-6 col-sm-6 col-md-4 col-lg-3 product-stagger';
+      card.style.animationDelay = `${0.05 * index}s`;
+      
+      card.innerHTML = `
+        <div class="card product-card h-100">
+          <div class="product-image-container">
+            <img src="${product.image}" alt="${product.name}" 
+                 class="card-img-top" loading="lazy"
+                 data-bs-toggle="modal" data-bs-target="#lightboxModal"
+                 data-bs-image="${product.image}">
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text mb-3">${formatPrice(product.price)}</p>
+            <a href="${product.link}" target="_blank" class="btn btn-primary mt-auto">
+              Buy on Shopee
+            </a>
+          </div>
+        </div>
+      `;
+      
+      return card;
+    };
 
-      // Get all product items
-      const allProductItems = Array.from(document.querySelectorAll('.product-card')).map(card => card.closest('.col-6'));
-      // Keep a copy of all products to use when filtering
-      let filteredProductItems = [...allProductItems];
-
-      const productContainer = document.querySelector('.row.g-3');
-      const paginationContainer = document.getElementById('pagination');
+    document.addEventListener('DOMContentLoaded', function() {
+      const productsGrid = document.getElementById('productsGrid');
+      const pagination = document.getElementById('pagination');
       const prevPageBtn = document.getElementById('prev-page');
       const nextPageBtn = document.getElementById('next-page');
       const itemsPerPageSelect = document.getElementById('itemsPerPage');
@@ -819,226 +530,176 @@
       const searchButton = document.getElementById('searchButton');
       const sortSelect = document.getElementById('sortProducts');
 
+      // App state
       let currentPage = 1;
       let itemsPerPage = parseInt(itemsPerPageSelect.value || 8);
+      let filteredProducts = [...products];
 
-      // Helper function to extract price from product
-      function extractPrice(product) {
-        try {
-          const priceText = product.querySelector('.card-text').textContent.trim();
-          return parseFloat(priceText.replace('₱', '').replace(/,/g, '')) || 0;
-        } catch (e) {
-          console.error("Error extracting price:", e);
-          return 0;
-        }
-      }
+      // Lightbox functionality
+      const lightboxModal = document.getElementById('lightboxModal');
+      const lightboxImage = document.getElementById('lightboxImage');
+      lightboxModal.addEventListener('show.bs.modal', function(event) {
+        const triggerImg = event.relatedTarget;
+        lightboxImage.src = triggerImg.getAttribute('data-bs-image');
+      });
 
-      // Helper function to extract name from product
-      function extractName(product) {
-        try {
-          return product.querySelector('.card-title').textContent.trim();
-        } catch (e) {
-          console.error("Error extracting name:", e);
-          return "";
-        }
-      }
-
-      // Display products for current page
-      function displayProducts() {
-        // Hide all products
-        allProductItems.forEach(item => {
-          item.style.display = 'none';
-        });
-
-        // Calculate start/end indexes
+      // Render products for current page
+      const renderProducts = () => {
+        // Clear existing products
+        productsGrid.innerHTML = '';
+        
+        // Calculate page range
         const startIndex = (currentPage - 1) * itemsPerPage;
-        let endIndex = startIndex + itemsPerPage;
-        if (endIndex > filteredProductItems.length) {
-          endIndex = filteredProductItems.length;
-        }
-
-        // Show relevant items
+        const endIndex = Math.min(startIndex + itemsPerPage, filteredProducts.length);
+        
+        // Generate and append product cards
+        const fragment = document.createDocumentFragment();
         for (let i = startIndex; i < endIndex; i++) {
-          if (filteredProductItems[i]) {
-            filteredProductItems[i].style.display = 'block';
-          }
+          fragment.appendChild(createProductCard(filteredProducts[i], i - startIndex));
         }
-
-        // Update "Showing X-Y of Z products"
-        if (showingProductsText) {
-          const showStart = filteredProductItems.length > 0 ? startIndex + 1 : 0;
-          showingProductsText.textContent = `Showing ${showStart}-${endIndex} of ${filteredProductItems.length} products`;
-        }
-
+        productsGrid.appendChild(fragment);
+        
+        // Update "Showing X-Y of Z products" text
+        showingProductsText.textContent = `Showing ${filteredProducts.length > 0 ? startIndex + 1 : 0}-${endIndex} of ${filteredProducts.length} products`;
+        
+        // Update pagination UI
         updatePaginationButtons();
-      }
+      };
 
-      // Create pagination
-      function setupPagination() {
-        if (!paginationContainer) return;
-
-        // Clear existing page links (except prev/next)
-        const pageLinks = paginationContainer.querySelectorAll('.page-item:not(:first-child):not(:last-child)');
+      // Create pagination links
+      const renderPagination = () => {
+        // Remove all page number links
+        const pageLinks = pagination.querySelectorAll('.page-item:not(:first-child):not(:last-child)');
         pageLinks.forEach(item => item.remove());
-
-        // Total pages
-        const totalPages = Math.ceil(filteredProductItems.length / itemsPerPage);
-        const nextPageItem = paginationContainer.querySelector('.page-item:last-child');
-
-        // Insert page number links
+        
+        // Calculate total pages
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        const nextPageItem = pagination.querySelector('.page-item:last-child');
+        
+        // Add page number links
         for (let i = 1; i <= totalPages; i++) {
           const pageItem = document.createElement('li');
-          pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
-
+          pageItem.className = `page-item${i === currentPage ? ' active' : ''}`;
+          
           const pageLink = document.createElement('a');
           pageLink.className = 'page-link';
           pageLink.href = '#';
-          pageLink.setAttribute('data-page', i);
           pageLink.textContent = i;
-
-          pageLink.addEventListener('click', function (e) {
+          pageLink.setAttribute('data-page', i);
+          pageLink.addEventListener('click', function(e) {
             e.preventDefault();
             currentPage = parseInt(this.getAttribute('data-page'));
-            displayProducts();
+            renderProducts();
           });
-
+          
           pageItem.appendChild(pageLink);
-          paginationContainer.insertBefore(pageItem, nextPageItem);
+          pagination.insertBefore(pageItem, nextPageItem);
         }
-
+        
         updatePaginationButtons();
-      }
-
-      // Update pagination buttons (prev, next)
-      function updatePaginationButtons() {
-        if (!paginationContainer) return;
-        const totalPages = Math.ceil(filteredProductItems.length / itemsPerPage);
-
+      };
+      
+      // Update prev/next buttons state
+      const updatePaginationButtons = () => {
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        
         // Update active page
-        const pageLinks = paginationContainer.querySelectorAll('.page-item:not(:first-child):not(:last-child)');
+        const pageLinks = pagination.querySelectorAll('.page-item:not(:first-child):not(:last-child)');
         pageLinks.forEach(item => {
           const pageNum = parseInt(item.querySelector('.page-link').getAttribute('data-page'));
           item.classList.toggle('active', pageNum === currentPage);
         });
-
-        // Prev button
-        if (currentPage === 1 || totalPages === 0) {
-          prevPageBtn.parentElement.classList.add('disabled');
-        } else {
-          prevPageBtn.parentElement.classList.remove('disabled');
+        
+        // Prev button state
+        prevPageBtn.parentElement.classList.toggle('disabled', currentPage <= 1);
+        
+        // Next button state
+        nextPageBtn.parentElement.classList.toggle('disabled', currentPage >= totalPages);
+      };
+      
+      // Filter products by search term
+      const filterProducts = (searchTerm = '') => {
+        searchTerm = searchTerm.trim().toLowerCase();
+        filteredProducts = searchTerm === '' ? 
+          [...products] : 
+          products.filter(product => product.name.toLowerCase().includes(searchTerm));
+        
+        currentPage = 1;
+        renderPagination();
+        renderProducts();
+      };
+      
+      // Sort products
+      const sortProducts = (sortBy = 'default') => {
+        switch(sortBy) {
+          case 'price-low':
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-high':
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+          case 'name':
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          default:
+            // Default sorting by ID to restore original order
+            filteredProducts.sort((a, b) => a.id - b.id);
         }
-        // Next button
-        if (currentPage === totalPages || totalPages === 0) {
-          nextPageBtn.parentElement.classList.add('disabled');
-        } else {
-          nextPageBtn.parentElement.classList.remove('disabled');
+        
+        currentPage = 1;
+        renderProducts();
+      };
+
+      // Event Listeners
+      
+      // Pagination navigation
+      prevPageBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          renderProducts();
         }
-      }
-
-      // Prev page button
-      if (prevPageBtn) {
-        prevPageBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-          if (currentPage > 1) {
-            currentPage--;
-            displayProducts();
-          }
-        });
-      }
-      // Next page button
-      if (nextPageBtn) {
-        nextPageBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-          const totalPages = Math.ceil(filteredProductItems.length / itemsPerPage);
-          if (currentPage < totalPages) {
-            currentPage++;
-            displayProducts();
-          }
-        });
-      }
-
+      });
+      
+      nextPageBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderProducts();
+        }
+      });
+      
       // Items per page change
-      if (itemsPerPageSelect) {
-        itemsPerPageSelect.addEventListener('change', function () {
-          itemsPerPage = parseInt(this.value);
-          currentPage = 1;
-          setupPagination();
-          displayProducts();
-        });
-      }
-
-      // Modern search implementation with debouncing
-      if (searchInput) {
-        // Debounce function to limit how often the search executes
-        const debounce = (func, delay) => {
-          let timeoutId;
-          return (...args) => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => func(...args), delay);
-          };
+      itemsPerPageSelect.addEventListener('change', function() {
+        itemsPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderPagination();
+        renderProducts();
+      });
+      
+      // Search functionality with debounce
+      const debounce = (fn, delay) => {
+        let timeoutId;
+        return (...args) => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => fn(...args), delay);
         };
-
-        // Create debounced search handler for better performance
-        const handleSearch = debounce(() => {
-          const searchTerm = searchInput.value.toLowerCase().trim();
-          filteredProductItems = searchTerm === ''
-            ? [...allProductItems]
-            : allProductItems.filter(item => {
-              const title = item.querySelector('.card-title').textContent.toLowerCase();
-              return title.includes(searchTerm);
-            });
-
-          currentPage = 1;
-          setupPagination();
-          displayProducts();
-        }, 300); // 300ms debounce delay
-
-        // Respond to input changes (more responsive than keypress)
-        searchInput.addEventListener('input', handleSearch);
-
-        // Keep Enter key functionality
-        searchInput.addEventListener('keydown', e => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSearch();
-          }
-        });
-
-        // Keep the search button functionality
-        searchButton.addEventListener('click', handleSearch);
-      }
-
-      // Modern sort implementation using strategy pattern
-      if (sortSelect) {
-        // Define sorting strategies using an object literal pattern
-        const sortStrategies = {
-          'default': () => [...allProductItems],
-          'price-low': () => [...filteredProductItems].sort((a, b) => extractPrice(a) - extractPrice(b)),
-          'price-high': () => [...filteredProductItems].sort((a, b) => extractPrice(b) - extractPrice(a)),
-          'name': () => [...filteredProductItems].sort((a, b) => extractName(a).localeCompare(extractName(b)))
-        };
-
-        sortSelect.addEventListener('change', () => {
-          const sortValue = sortSelect.value;
-          // Apply selected sort strategy or default if strategy not found
-          filteredProductItems = sortStrategies[sortValue]
-            ? sortStrategies[sortValue]()
-            : [...filteredProductItems];
-
-          // Reorder in DOM using DocumentFragment for better performance
-          const fragment = document.createDocumentFragment();
-          filteredProductItems.forEach(item => fragment.appendChild(item));
-          productContainer.appendChild(fragment);
-
-          currentPage = 1;
-          setupPagination();
-          displayProducts();
-        });
-      }
-
-      // Initial setup
-      setupPagination();
-      displayProducts();
+      };
+      
+      const debouncedSearch = debounce(() => {
+        filterProducts(searchInput.value);
+      }, 300);
+      
+      searchInput.addEventListener('input', debouncedSearch);
+      searchButton.addEventListener('click', () => filterProducts(searchInput.value));
+      
+      // Sort functionality
+      sortSelect.addEventListener('change', () => sortProducts(sortSelect.value));
+      
+      // Initialize products display
+      renderPagination();
+      renderProducts();
     });
   </script>
 </body>
