@@ -4,29 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Emily's Fashion Collections - Home</title>
-  <!-- Bootstrap CSS -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   />
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for Icons -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
   <link rel="stylesheet" href="styles.css" />
-  <!-- EmailJS Library -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
-    /* Only keeping non-navbar styles */
     .carousel-item img {
       object-fit: cover;
-      height: auto; /* Changed from 500px fixed height to auto */
-      max-height: 70vh; /* Added max-height as percentage of viewport height */
+      height: auto;
+      max-height: 70vh;
       width: 100%;
     }
 
@@ -38,21 +33,30 @@
       margin: 0 auto;
     }
     
-    /* Added to ensure consistent aspect ratio */
     .carousel-inner {
       aspect-ratio: 16 / 9;
     }
   </style>
+  <script>
+    window.onload = function() {
+      if(document.referrer === '' || !document.referrer.includes('index.html')) {
+        const directAccess = sessionStorage.getItem('directAccess');
+        if(!directAccess) {
+          sessionStorage.setItem('directAccess', 'true');
+          window.location.href = 'index.html';
+        } else {
+          sessionStorage.removeItem('directAccess');
+        }
+      }
+    };
+  </script>
 </head>
 <body>
 
-<!-- HEADER / NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
   <div class="container d-flex align-items-center justify-content-between">
     <a class="navbar-brand d-flex align-items-center" href="main.html">
       <img src="../images/logo.png" alt="Emily's Fashion Collections Logo" class="logo" />
-      <!-- Optionally, add brand text here -->
-      <!-- <span class="brand-name">Emily's Fashion</span> -->
     </a>
     <button
       class="navbar-toggler"
@@ -66,7 +70,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <!-- Do not statically add active; add it only on the current page -->
         <li class="nav-item">
           <a class="nav-link" href="main.html">Home</a>
         </li>
@@ -91,7 +94,6 @@
   </div>
 </nav>
 
-<!-- CAROUSEL (Sliding Window/Images) -->
 <div class="container mt-4 reveal">
   <div id="homeCarousel" class="carousel slide carousel-fade custom-carousel" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-indicators">
@@ -157,23 +159,19 @@
   </div>
 </div>
 
-  <!-- NEW: Special Offer Countdown -->
   <div class="container mt-4">
     <div class="countdown-container reveal delay-1">
       <h4 class="countdown-title">Special Offer Ends In:</h4>
       <div id="countdown" class="countdown">
-        <!-- Countdown timer will be inserted here by JS -->
       </div>
       <p class="mt-2 mb-0">Use code <strong>FASHION25</strong> for 25% off all items!</p>
     </div>
   </div>
 
-<!-- FEATURED PRODUCTS SECTION -->
 <section class="py-5">
   <div class="container">
     <h2 class="text-center mb-4 reveal">Featured Products</h2>
     <div class="row g-4">
-      <!-- Product Card 1 -->
       <div class="col-sm-6 col-md-6 col-lg-4 mb-4 reveal delay-1">
         <div class="card shadow-sm product-frame">
           <div class="product-image-container">
@@ -192,7 +190,6 @@
         </div>
       </div>
       
-      <!-- Product Card 2 -->
       <div class="col-sm-6 col-md-6 col-lg-4 mb-4 reveal delay-2">
         <div class="card shadow-sm product-frame">
           <div class="product-image-container">
@@ -211,7 +208,6 @@
         </div>
       </div>
       
-      <!-- Product Card 3 -->
       <div class="col-sm-6 col-md-6 col-lg-4 mb-4 reveal delay-3">
         <div class="card shadow-sm product-frame">
           <div class="product-image-container">
@@ -231,7 +227,6 @@
       </div>
     </div>
 
-    <!-- CTA to Shopee Store -->
     <div class="text-center mt-4 reveal delay-4">
       <a
         href="https://shopee.ph/emilysamosino"
@@ -244,33 +239,24 @@
   </div>
 </section>
 
-  <!-- FOOTER -->
   <footer class="bg-purple text-white py-5 mt-auto">
     <div class="container">
-      <!-- Footer Top: Logo and Tagline -->
       <div class="footer-top text-center mb-4 reveal">
         <h3 class="mb-2">Emily's Fashion Collections</h3>
         <p class="mb-0">Trendy and Affordable Clothes for Everyone</p>
         <div class="gold-divider mx-auto my-4"></div>
       </div>
-      
-      <!-- Footer Main Content -->
       <div class="row g-4">
-        <!-- Company Info -->
         <div class="col-md-6 mb-4 mb-md-0 reveal delay-1">
           <h5 class="footer-heading">About Us</h5>
           <p class="footer-text">Emily's Fashion Collections offers curated fashion pieces that blend style, comfort, and affordability. We believe everyone deserves to look and feel their best.</p>
           <div class="social-icons mt-3">
-            <a href="#" class="social-icon reveal-hover" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon reveal-hover" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100064140607178" class="social-icon reveal-hover" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/emilysamosino/" class="social-icon reveal-hover" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-icon reveal-hover" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
             <a href="#" class="social-icon reveal-hover" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
           </div>
         </div>
-        
-        <!-- Quick Links Section REMOVED -->
-        
-        <!-- Newsletter -->
         <div class="col-md-6 reveal delay-3">
           <h5 class="footer-heading">Stay Updated</h5>
           <p class="footer-text">Subscribe to our newsletter for exclusive offers and updates.</p>
@@ -294,8 +280,6 @@
         </div>
       </div>
     </div>
-    
-    <!-- Footer Bottom: Copyright & Credits -->
     <div class="footer-bottom mt-4">
       <div class="container">
         <div class="row">
@@ -309,12 +293,9 @@
       </div>
     </div>
   </footer>
-
-  <!-- Bootstrap JS (and dependencies) -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>
-  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
