@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Emily's Fashion Collections - Home</title>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- EmailJS Library -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    /* Only keeping non-navbar styles */
+    .carousel-item img {
+      object-fit: cover;
+      height: auto; /* Changed from 500px fixed height to auto */
+      max-height: 70vh; /* Added max-height as percentage of viewport height */
+      width: 100%;
+    }
+
+    .carousel-caption {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    /* Added to ensure consistent aspect ratio */
+    .carousel-inner {
+      aspect-ratio: 16 / 9;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER / NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="navbar-brand d-flex align-items-center" href="main.html">
+      <img src="../images/logo.png" alt="Emily's Fashion Collections Logo" class="logo" />
+      <!-- Optionally, add brand text here -->
+      <!-- <span class="brand-name">Emily's Fashion</span> -->
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <!-- Do not statically add active; add it only on the current page -->
+        <li class="nav-item">
+          <a class="nav-link" href="main.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+            Shop
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="shop.html">All Products</a></li>
+            <li><a class="dropdown-item" href="shop.html?category=dresses">Dresses</a></li>
+            <li><a class="dropdown-item" href="shop.html?category=tops">Tops</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- CAROUSEL (Sliding Window/Images) -->
+<div class="container mt-4 reveal">
+  <div id="homeCarousel" class="carousel slide carousel-fade custom-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#homeCarousel"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#homeCarousel"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+    </div>
+    <div class="carousel-inner rounded shadow">
+      <div class="carousel-item active">
+        <img 
+          src="../images/slide1.png" 
+          class="d-block w-100" 
+          alt="Slide 1" 
+          loading="eager" 
+        />
+        <div class="carousel-caption d-md-block reveal delay-1">
+          <h5>Welcome to Emily's Fashion</h5>
+          <p>Trendy and Affordable Clothes for Everyone</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img 
+          src="https://scontent.fmnl17-7.fna.fbcdn.net/v/t39.30808-6/482217237_1055604516587559_6789622230513277531_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=TncZivhyzdUQ7kNvgH3kIRc&_nc_oc=AdhWFPuK8IaT9-n6tgijqQwWuf-hGI8ynzINQdnyyEEcuIg_ofJ25sEldNwwmD3TW9M&_nc_zt=23&_nc_ht=scontent.fmnl17-7.fna&_nc_gid=AwjLhKACPNPc9-eYLY4HIhi&oh=00_AYHwn40e1ffI4cvAr06ArmzeEcGxC0c1gKS-TBKU_QujWw&oe=67D39E43" 
+          class="d-block w-100" 
+          alt="Slide 2"  
+          loading="lazy" 
+        />
+        <div class="carousel-caption d-md-block reveal delay-1">
+          <h5>New Arrivals</h5>
+          <p>Check out our latest collections!</p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#homeCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#homeCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+  <!-- NEW: Special Offer Countdown -->
+  <div class="container mt-4">
+    <div class="countdown-container reveal delay-1">
+      <h4 class="countdown-title">Special Offer Ends In:</h4>
+      <div id="countdown" class="countdown">
+        <!-- Countdown timer will be inserted here by JS -->
+      </div>
+      <p class="mt-2 mb-0">Use code <strong>FASHION25</strong> for 25% off all items!</p>
+    </div>
+  </div>
+
+<!-- FEATURED PRODUCTS SECTION -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4 reveal">Featured Products</h2>
+    <div class="row g-4">
+      <!-- Product Card 1 -->
+      <div class="col-sm-6 col-md-6 col-lg-4 mb-4 reveal delay-1">
+        <div class="card shadow-sm product-frame">
+          <div class="product-image-container">
+            <img
+              src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasc-m5rz10gjsvimd0.webp"
+              class="card-img-top"
+              alt="Product 1"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Black Bodycon Dress</h5>
+            <p class="card-text">Comfortable and stylish casual dress for everyday wear.</p>
+            <a href="shop.html" class="btn btn-primary">View More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 2 -->
+      <div class="col-sm-6 col-md-6 col-lg-4 mb-4 reveal delay-2">
+        <div class="card shadow-sm product-frame">
+          <div class="product-image-container">
+            <img
+              src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286dohv46.webp"
+              class="card-img-top"
+              alt="Product 2"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Red Dress</h5>
+            <p class="card-text">Perfect for the office or a night out. Available in multiple colors.</p>
+            <a href="shop.html" class="btn btn-primary">View More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 3 -->
+      <div class="col-sm-6 col-md-6 col-lg-4 mb-4 reveal delay-3">
+        <div class="card shadow-sm product-frame">
+          <div class="product-image-container">
+            <img
+              src="https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286c9xf81.webp"
+              class="card-img-top"
+              alt="Product 3"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Black Fringe Dress</h5>
+            <p class="card-text">Add a pop of color to your wardrobe with this trendy blouse.</p>
+            <a href="shop.html" class="btn btn-primary">View More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA to Shopee Store -->
+    <div class="text-center mt-4 reveal delay-4">
+      <a
+        href="https://shopee.ph/emilysamosino"
+        target="_blank"
+        class="btn btn-warning"
+      >
+        Visit Our Shopee Store
+      </a>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="bg-purple text-white py-5 mt-auto">
+    <div class="container">
+      <!-- Footer Top: Logo and Tagline -->
+      <div class="footer-top text-center mb-4 reveal">
+        <h3 class="mb-2">Emily's Fashion Collections</h3>
+        <p class="mb-0">Trendy and Affordable Clothes for Everyone</p>
+        <div class="gold-divider mx-auto my-4"></div>
+      </div>
+      
+      <!-- Footer Main Content -->
+      <div class="row g-4">
+        <!-- Company Info -->
+        <div class="col-md-4 mb-4 mb-md-0 reveal delay-1">
+          <h5 class="footer-heading">About Us</h5>
+          <p class="footer-text">Emily's Fashion Collections offers curated fashion pieces that blend style, comfort, and affordability. We believe everyone deserves to look and feel their best.</p>
+          <div class="social-icons mt-3">
+            <a href="#" class="social-icon reveal-hover" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="col-md-4 mb-4 mb-md-0 reveal delay-2">
+          <h5 class="footer-heading">Quick Links</h5>
+          <ul class="footer-links">
+            <li class="reveal-list"><a href="main.html">Home</a></li>
+            <li class="reveal-list"><a href="about.html">About Us</a></li>
+            <li class="reveal-list"><a href="shop.html">Shop</a></li>
+            <li class="reveal-list"><a href="https://shopee.ph/emilysamosino" target="_blank">Shopee Store</a></li>
+            <li class="reveal-list"><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <!-- Newsletter -->
+        <div class="col-md-4 reveal delay-3">
+          <h5 class="footer-heading">Stay Updated</h5>
+          <p class="footer-text">Subscribe to our newsletter for exclusive offers and updates.</p>
+          <div class="newsletter-form mt-3">
+            <form id="newsletter-form">
+              <div class="input-group mb-2">
+                <input type="email" class="form-control reveal-input" id="newsletter-email" placeholder="Your email address" aria-label="Email address" required>
+                <button class="btn btn-gold reveal-btn" type="submit" id="newsletter-submit">
+                  <span id="button-text">Subscribe</span>
+                  <span id="button-loading" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="form-feedback mt-2">
+                <div id="newsletter-success" class="text-success small d-none">Thank you! You've been subscribed successfully.</div>
+                <div id="newsletter-error" class="text-warning small d-none">Something went wrong. Please try again.</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer Bottom: Copyright & Credits -->
+    <div class="footer-bottom mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start reveal delay-4">
+            <p class="mb-0">&copy; 2025 Emily's Fashion Collections. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end reveal delay-4">
+            <p class="mb-0">Designed with <i class="fas fa-heart text-gold"></i> by Samosino</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (and dependencies) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Emily's Fashion Collections - Shop trendy and affordable fashion pieces">
+  <title>Shop | Emily's Fashion Collections</title>
+  
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Shop Page Specific Styles -->
+  <style>
+    /* Modern Product Card Styling - FIXED */
+    .product-card {
+      transition: all 0.3s ease;
+      height: 100%;
+      border-radius: 12px;
+      border: none;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+      background: var(--white);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(74, 0, 114, 0.12);
+    }
+    
+    /* Fixed product-image-container */
+    .product-image-container {
+      position: relative;
+      padding-top: 125%;
+      overflow: hidden;
+      background-color: #f9f9f9;
+      /* Remove z-index property altogether to prevent stacking context issues */
+    }
+    
+    .product-image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover .product-image-container img {
+      transform: scale(1.08);
+    }
+    
+    /* Fixed badge positioning */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2; /* Keep consistent */
+      border-radius: 30px;
+      padding: 6px 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Fixed wishlist icon positioning */
+    .wishlist-icon {
+      z-index: 2; /* Keep consistent */
+      transition: all 0.2s ease;
+    }
+    
+    .wishlist-btn {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.85;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-card:hover .wishlist-btn {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    .wishlist-btn i {
+      font-size: 0.95rem;
+      color: #555;
+      transition: all 0.2s ease;
+    }
+    
+    .wishlist-btn:hover {
+      background: white;
+      transform: scale(1.15) rotate(5deg);
+    }
+    
+    .wishlist-btn i.fas.text-danger {
+      color: #ff3366 !important;
+    }
+    
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      min-height: 44px;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+    
+    .card-body {
+      padding: 1.2rem;
+    }
+    
+    .price-text {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--purple-primary);
+      margin-bottom: 1rem;
+    }
+    
+    .btn-card-action {
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 0.5rem 1rem;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-primary.btn-card-action {
+      box-shadow: 0 4px 12px rgba(74, 0, 114, 0.18);
+    }
+    
+    .btn-outline-secondary.btn-card-action {
+      border-color: #e0e0e0;
+    }
+    
+    .btn-outline-secondary.btn-card-action:hover {
+      background-color: #f8f8f8;
+      color: var(--purple-primary);
+      border-color: #d0d0d0;
+    }
+    
+    /* Product animation */
+    .product-stagger {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Pagination - keep existing styles */
+    .custom-pagination .page-link {
+      color: var(--purple-primary);
+      border-color: #e0e0e0;
+      background-color: white;
+      transition: all 0.3s;
+    }
+    
+    .custom-pagination .page-item.active .page-link {
+      background-color: var(--purple-primary);
+      border-color: var(--purple-primary);
+      color: white;
+    }
+    
+    .custom-pagination .page-link:hover:not(.active) {
+      background-color: #f0e6f5;
+    }
+    
+    .badge-new {
+      background: linear-gradient(45deg, var(--purple-primary), var(--gold-accent));
+      color: white;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a class="navbar-brand d-flex align-items-center" href="main.html">
+        <img src="../images/logo.png" alt="Emily's Fashion Collections Logo" class="logo" />
+        <!-- Optionally, add brand text here -->
+        <!-- <span class="brand-name">Emily's Fashion</span> -->
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Do not statically add active; add it only on the current page -->
+          <li class="nav-item">
+            <a class="nav-link" href="main.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+              Shop
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="shop.html">All Products</a></li>
+              <li><a class="dropdown-item" href="shop.html?category=dresses">Dresses</a></li>
+              <li><a class="dropdown-item" href="shop.html?category=tops">Tops</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>  
+
+  <!-- Main Content -->
+  <section class="container py-5">
+    <h1 class="mb-4">Our Collection</h1>
+
+    <!-- Filter Controls -->
+    <div class="mb-4">
+      <div class="row g-2">
+        <div class="col-md-6 mb-2">
+          <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
+            <button class="btn btn-primary" type="button" id="searchButton">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2">
+          <div class="d-flex justify-content-md-end">
+            <select class="form-select" id="sortProducts" style="max-width: 200px;">
+              <option value="default">Sort by</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name">Name: A to Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row g-3" id="productsGrid">
+      <!-- Products will be loaded from JS -->
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Product pagination" class="container mb-5 mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <span id="showing-products">Showing products</span>
+        </div>
+        <div>
+          <label for="itemsPerPage">Items per page:</label>
+          <select id="itemsPerPage" class="form-select form-select-sm d-inline-block ms-2" style="width: auto;">
+            <option value="8">8</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+      </div>
+      <ul class="pagination justify-content-center custom-pagination" id="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" aria-label="Previous" id="prev-page">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <!-- Page numbers inserted by JS -->
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next" id="next-page">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-purple text-white py-5 mt-auto">
+    <div class="container">
+      <!-- Footer Top: Logo and Tagline -->
+      <div class="footer-top text-center mb-4 reveal">
+        <h3 class="mb-2">Emily's Fashion Collections</h3>
+        <p class="mb-0">Trendy and Affordable Clothes for Everyone</p>
+        <div class="gold-divider mx-auto my-4"></div>
+      </div>
+      
+      <!-- Footer Main Content -->
+      <div class="row g-4">
+        <!-- Company Info -->
+        <div class="col-md-4 mb-4 mb-md-0 reveal delay-1">
+          <h5 class="footer-heading">About Us</h5>
+          <p class="footer-text">Emily's Fashion Collections offers curated fashion pieces that blend style, comfort, and affordability. We believe everyone deserves to look and feel their best.</p>
+          <div class="social-icons mt-3">
+            <a href="#" class="social-icon reveal-hover" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="col-md-4 mb-4 mb-md-0 reveal delay-2">
+          <h5 class="footer-heading">Quick Links</h5>
+          <ul class="footer-links">
+            <li class="reveal-list"><a href="main.html">Home</a></li>
+            <li class="reveal-list"><a href="about.html">About Us</a></li>
+            <li class="reveal-list"><a href="shop.html">Shop</a></li>
+            <li class="reveal-list"><a href="https://shopee.ph/emilysamosino" target="_blank">Shopee Store</a></li>
+            <li class="reveal-list"><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <!-- Newsletter -->
+        <div class="col-md-4 reveal delay-3">
+          <h5 class="footer-heading">Stay Updated</h5>
+          <p class="footer-text">Subscribe to our newsletter for exclusive offers and updates.</p>
+          <div class="newsletter-form mt-3">
+            <form id="newsletter-form">
+              <div class="input-group mb-2">
+                <input type="email" class="form-control reveal-input" id="newsletter-email" placeholder="Your email address" aria-label="Email address" required>
+                <button class="btn btn-gold reveal-btn" type="submit" id="newsletter-submit">
+                  <span id="button-text">Subscribe</span>
+                  <span id="button-loading" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="form-feedback mt-2">
+                <div id="newsletter-success" class="text-success small d-none">Thank you! You've been subscribed successfully.</div>
+                <div id="newsletter-error" class="text-warning small d-none">Something went wrong. Please try again.</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer Bottom: Copyright & Credits -->
+    <div class="footer-bottom mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start reveal delay-4">
+            <p class="mb-0">&copy; 2025 Emily's Fashion Collections. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end reveal delay-4">
+            <p class="mb-0">Designed with <i class="fas fa-heart text-gold"></i> by Samosino</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 bg-transparent">
+        <div class="modal-body p-0 position-relative">
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="" id="lightboxImage" class="img-fluid rounded shadow" alt="Product Full View">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- App JS -->
+  <script>
+    // Product data - in a real app this would come from an API
+    const products = [
+      {
+        id: 1,
+        name: "Red Puff-Sleeve Dress",
+        price: 250.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7ras9-m5z2m6t6rtz61f.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.24140976195"
+      },
+      {
+        id: 2,
+        name: "Pink Floral Dress",
+        price: 250.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasc-m5rz10gjsvimd0.webp",
+        link: "https://shopee.ph/PremiumDressLiveSellingOnly-i.194049369.25941175306"
+      },
+      {
+        id: 3,
+        name: "Black Bodycon Dress",
+        price: 99.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286c9xf81.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29524912923"
+      },
+      {
+        id: 4,
+        name: "Pink Tie Dress",
+        price: 99.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5zgyb54jszya8.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.26674965367"
+      },
+      {
+        id: 5,
+        name: "Black Fringe Dress",
+        price: 99.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5q39286dohv46.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29524912923"
+      },
+      {
+        id: 6,
+        name: "Colorblock Bodycon Dress",
+        price: 230.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtyhkya6.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.27824922172"
+      },
+      {
+        id: 7,
+        name: "Striped Sleeveless Dress",
+        price: 799.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q39286avcz0e.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.28974917782"
+      },
+      {
+        id: 8,
+        name: "Floral Maxi Dress",
+        price: 299.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m0iv90xxgnzi28.webp",
+        link: "https://shopee.ph/Maxi-Dress-(S-M-L)-Live-Selling-i.194049369.24386373011"
+      },
+      {
+        id: 9,
+        name: "Striped Midi Dress",
+        price: 150.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rask-m5q12ogtsvb6a6.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.24190981216"
+      },
+      {
+        id: 10,
+        name: "Blue Button-Down Dress",
+        price: 1256.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m6k027dyy9e393.webp",
+        link: "https://shopee.ph/PremiumDressliveSelling-i.194049369.28777105809"
+      },
+      {
+        id: 11,
+        name: "Pastel Chiffon Dress",
+        price: 497.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m62s54nfab2m58.webp", 
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.28525751171"
+      },
+      {
+        id: 12,
+        name: "Beige Casual Dress",
+        price: 230.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7ras8-m5q12ogtu9vm55.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.26724922188"
+      },
+      {
+        id: 13,
+        name: "Striped Bodycon Dress",
+        price: 250.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m5q12ogtzw5e5a.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.28074917635"
+      },
+      {
+        id: 14,
+        name: "Striped T-Shirt Dress",
+        price: 230.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasb-m5q39286ghmr33.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29924907979"
+      },
+      {
+        id: 15,
+        name: "Collared Bodycon Dress",
+        price: 680.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m5rz10gjrgy615.webp",
+        link: "https://shopee.ph/Maxisilkdressliveselling-i.194049369.26824964214"
+      },
+      {
+        id: 16,
+        name: "Floral Mesh Dress",
+        price: 2488.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5rz10gjonta71.webp",
+        link: "https://shopee.ph/PremiumdressLiveSelling-i.194049369.29874963893"
+      },
+      {
+        id: 17,
+        name: "Printed A-Line Dress",
+        price: 1709.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasj-m5rz10gjua3259.webp",
+        link: "https://shopee.ph/MaxiDressLiveSelling-i.194049369.29274976057"
+      },
+      {
+        id: 18,
+        name: "Casual Midi Dress",
+        price: 560.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rash-m5q12ogtq26a15.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.29574921974"
+      },
+      {
+        id: 19,
+        name: "Pink Spaghetti Dress",
+        price: 810.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7rasa-m5q12ogtrgqq73.webp",
+        link: "https://shopee.ph/Maxi-Dress-Live-Selling-i.194049369.25440980427"
+      },
+      {
+        id: 20,
+        name: "Floral Maxi Dress",
+        price: 4249.00,
+        image: "https://down-ph.img.susercontent.com/file/ph-11134207-7r98y-ltjfmxfqn5hf5b.webp",
+        link: "https://shopee.ph/Maxi-Dress-(S-M-L)-Live-Selling-i.194049369.5046702521"
+      }
+    ];
+
+    // Format price with PHP peso
+    const formatPrice = (price) => {
+      return '₱' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    };
+
+    // Create product card HTML - FIXED STRUCTURE
+    const createProductCard = (product, index) => {
+      const card = document.createElement('div');
+      card.className = 'col-6 col-sm-6 col-md-4 col-lg-3 product-stagger';
+      card.style.animationDelay = `${0.05 * index}s`;
+      
+      // Calculate if item is new (for demonstration, items with ID < 5 are "new")
+      const isNew = product.id < 5;
+      
+      card.innerHTML = `
+        <div class="card product-card h-100">
+          <div class="product-image-container">
+            ${isNew ? '<span class="card-badge badge-new">New</span>' : ''}
+            <div class="wishlist-icon position-absolute top-0 end-0 m-2">
+              <button class="wishlist-btn" aria-label="Add to wishlist">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            <img src="${product.image}" alt="${product.name}" 
+                 class="card-img-top" loading="lazy"
+                 data-bs-toggle="modal" data-bs-target="#lightboxModal"
+                 data-bs-image="${product.image}">
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="price-text mb-3">${formatPrice(product.price)}</p>
+            <div class="d-grid gap-2 mt-auto">
+              <a href="${product.link}" target="_blank" class="btn btn-primary btn-card-action">
+                <i class="fas fa-shopping-cart me-2"></i>Buy on Shopee
+              </a>
+              <button class="btn btn-outline-secondary btn-card-action btn-quick-view" 
+                      data-bs-toggle="modal" data-bs-target="#lightboxModal"
+                      data-bs-image="${product.image}">
+                Quick View
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Setup wishlist toggle after card is created
+      const wishlistBtn = card.querySelector('.wishlist-btn');
+      if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const icon = this.querySelector('i');
+          icon.classList.toggle('far');
+          icon.classList.toggle('fas');
+          icon.classList.toggle('text-danger');
+          
+          // Add a little animation when toggling wishlist
+          this.classList.add('animate__animated', 'animate__heartBeat');
+          setTimeout(() => {
+            this.classList.remove('animate__animated', 'animate__heartBeat');
+          }, 1000);
+        });
+      }
+      
+      return card;
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const productsGrid = document.getElementById('productsGrid');
+      const pagination = document.getElementById('pagination');
+      const prevPageBtn = document.getElementById('prev-page');
+      const nextPageBtn = document.getElementById('next-page');
+      const itemsPerPageSelect = document.getElementById('itemsPerPage');
+      const showingProductsText = document.getElementById('showing-products');
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+      const sortSelect = document.getElementById('sortProducts');
+
+      // App state
+      let currentPage = 1;
+      let itemsPerPage = parseInt(itemsPerPageSelect.value || 8);
+      let filteredProducts = [...products];
+
+      // Lightbox functionality
+      const lightboxModal = document.getElementById('lightboxModal');
+      const lightboxImage = document.getElementById('lightboxImage');
+      lightboxModal.addEventListener('show.bs.modal', function(event) {
+        const triggerImg = event.relatedTarget;
+        lightboxImage.src = triggerImg.getAttribute('data-bs-image');
+      });
+
+      // Render products for current page
+      const renderProducts = () => {
+        // Clear existing products
+        productsGrid.innerHTML = '';
+        
+        // Calculate page range
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, filteredProducts.length);
+        
+        // Generate and append product cards
+        const fragment = document.createDocumentFragment();
+        for (let i = startIndex; i < endIndex; i++) {
+          fragment.appendChild(createProductCard(filteredProducts[i], i - startIndex));
+        }
+        productsGrid.appendChild(fragment);
+        
+        // Update "Showing X-Y of Z products" text
+        showingProductsText.textContent = `Showing ${filteredProducts.length > 0 ? startIndex + 1 : 0}-${endIndex} of ${filteredProducts.length} products`;
+        
+        // Update pagination UI
+        updatePaginationButtons();
+      };
+
+      // Create pagination links
+      const renderPagination = () => {
+        // Remove all page number links
+        const pageLinks = pagination.querySelectorAll('.page-item:not(:first-child):not(:last-child)');
+        pageLinks.forEach(item => item.remove());
+        
+        // Calculate total pages
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        const nextPageItem = pagination.querySelector('.page-item:last-child');
+        
+        // Add page number links
+        for (let i = 1; i <= totalPages; i++) {
+          const pageItem = document.createElement('li');
+          pageItem.className = `page-item${i === currentPage ? ' active' : ''}`;
+          
+          const pageLink = document.createElement('a');
+          pageLink.className = 'page-link';
+          pageLink.href = '#';
+          pageLink.textContent = i;
+          pageLink.setAttribute('data-page', i);
+          pageLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentPage = parseInt(this.getAttribute('data-page'));
+            renderProducts();
+          });
+          
+          pageItem.appendChild(pageLink);
+          pagination.insertBefore(pageItem, nextPageItem);
+        }
+        
+        updatePaginationButtons();
+      };
+      
+      // Update prev/next buttons state
+      const updatePaginationButtons = () => {
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        
+        // Update active page
+        const pageLinks = pagination.querySelectorAll('.page-item:not(:first-child):not(:last-child)');
+        pageLinks.forEach(item => {
+          const pageNum = parseInt(item.querySelector('.page-link').getAttribute('data-page'));
+          item.classList.toggle('active', pageNum === currentPage);
+        });
+        
+        // Prev button state
+        prevPageBtn.parentElement.classList.toggle('disabled', currentPage <= 1);
+        
+        // Next button state
+        nextPageBtn.parentElement.classList.toggle('disabled', currentPage >= totalPages);
+      };
+      
+      // Filter products by search term
+      const filterProducts = (searchTerm = '') => {
+        searchTerm = searchTerm.trim().toLowerCase();
+        filteredProducts = searchTerm === '' ? 
+          [...products] : 
+          products.filter(product => product.name.toLowerCase().includes(searchTerm));
+        
+        currentPage = 1;
+        renderPagination();
+        renderProducts();
+      };
+      
+      // Sort products
+      const sortProducts = (sortBy = 'default') => {
+        switch(sortBy) {
+          case 'price-low':
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-high':
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+          case 'name':
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          default:
+            // Default sorting by ID to restore original order
+            filteredProducts.sort((a, b) => a.id - b.id);
+        }
+        
+        currentPage = 1;
+        renderProducts();
+      };
+
+      // Event Listeners
+      
+      // Pagination navigation
+      prevPageBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          renderProducts();
+        }
+      });
+      
+      nextPageBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderProducts();
+        }
+      });
+      
+      // Items per page change
+      itemsPerPageSelect.addEventListener('change', function() {
+        itemsPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderPagination();
+        renderProducts();
+      });
+      
+      // Search functionality with debounce
+      const debounce = (fn, delay) => {
+        let timeoutId;
+        return (...args) => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => fn(...args), delay);
+        };
+      };
+      
+      const debouncedSearch = debounce(() => {
+        filterProducts(searchInput.value);
+      }, 300);
+      
+      searchInput.addEventListener('input', debouncedSearch);
+      searchButton.addEventListener('click', () => filterProducts(searchInput.value));
+      
+      // Sort functionality
+      sortSelect.addEventListener('change', () => sortProducts(sortSelect.value));
+      
+      // Add some CSS for the new card elements
+      const style = document.createElement('style');
+      style.textContent = `
+        .product-card {
+          transition: transform 0.3s, box-shadow 0.3s;
+          border-radius: 8px;
+          border: 1px solid rgba(74, 0, 114, 0.1);
+          overflow: hidden;
+        }
+        
+        .price-text {
+          color: var(--purple-primary, #4a0072);
+          font-size: 1.1rem;
+        }
+        
+        .wishlist-icon button {
+          opacity: 0.8;
+          transition: opacity 0.2s, transform 0.2s;
+        }
+        
+        .wishlist-icon button:hover {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+        
+        .z-index-1 {
+          z-index: 1;
+        }
+        
+        .btn-quick-view {
+          transition: all 0.2s;
+        }
+        
+        .btn-quick-view:hover {
+          background-color: #f0e6f5;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Initialize products display
+      renderPagination();
+      renderProducts();
+    });
+  </script>
+</body>
+
+</html>
