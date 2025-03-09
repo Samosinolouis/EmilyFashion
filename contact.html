@@ -474,7 +474,7 @@
   <footer class="bg-purple text-white py-5 mt-auto">
     <div class="container">
       <!-- Footer Top: Logo and Tagline -->
-      <div class="footer-top text-center mb-4">
+      <div class="footer-top text-center mb-4 reveal">
         <h3 class="mb-2">Emily's Fashion Collections</h3>
         <p class="mb-0">Trendy and Affordable Clothes for Everyone</p>
         <div class="gold-divider mx-auto my-4"></div>
@@ -483,38 +483,39 @@
       <!-- Footer Main Content -->
       <div class="row g-4">
         <!-- Company Info -->
-        <div class="col-md-4 mb-4 mb-md-0">
+        <div class="col-md-6 mb-4 mb-md-0 reveal delay-1">
           <h5 class="footer-heading">About Us</h5>
           <p class="footer-text">Emily's Fashion Collections offers curated fashion pieces that blend style, comfort, and affordability. We believe everyone deserves to look and feel their best.</p>
           <div class="social-icons mt-3">
-            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="social-icon" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
           </div>
         </div>
         
-        <!-- Quick Links -->
-        <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="footer-heading">Quick Links</h5>
-          <ul class="footer-links">
-            <li><a href="main.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="https://shopee.ph/emilysamosino" target="_blank">Shopee Store</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
+        <!-- Quick Links Section REMOVED -->
         
         <!-- Newsletter -->
-        <div class="col-md-4">
+        <div class="col-md-6 reveal delay-3">
           <h5 class="footer-heading">Stay Updated</h5>
           <p class="footer-text">Subscribe to our newsletter for exclusive offers and updates.</p>
           <div class="newsletter-form mt-3">
-            <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Your email address" aria-label="Email address">
-              <button class="btn btn-gold" type="button">Subscribe</button>
-            </div>
+            <form id="newsletter-form">
+              <div class="input-group mb-2">
+                <input type="email" class="form-control reveal-input" id="newsletter-email" placeholder="Your email address" aria-label="Email address" required>
+                <button class="btn btn-gold reveal-btn" type="submit" id="newsletter-submit">
+                  <span id="button-text">Subscribe</span>
+                  <span id="button-loading" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="form-feedback mt-2">
+                <div id="newsletter-success" class="text-success small d-none">Thank you! You've been subscribed successfully.</div>
+                <div id="newsletter-error" class="text-warning small d-none">Something went wrong. Please try again.</div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -524,10 +525,10 @@
     <div class="footer-bottom mt-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 text-center text-md-start">
+          <div class="col-md-6 text-center text-md-start reveal delay-4">
             <p class="mb-0">&copy; 2025 Emily's Fashion Collections. All rights reserved.</p>
           </div>
-          <div class="col-md-6 text-center text-md-end">
+          <div class="col-md-6 text-center text-md-end reveal delay-4">
             <p class="mb-0">Designed with <i class="fas fa-heart text-gold"></i> by Samosino</p>
           </div>
         </div>

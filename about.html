@@ -66,72 +66,86 @@
       </div>
     </div>
   </nav>
-  
+
+  <!-- Hero Section -->
+  <div class="about-hero-section">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="hero-content text-center">
+        <h1 class="display-4 fw-bold reveal fade-in">About Our Journey</h1>
+        <div class="gold-divider mx-auto mb-4 reveal fade-in delay-1"></div>
+        <p class="lead reveal fade-in delay-2">Discover the passion and people behind Emily's Fashion Collections</p>
+      </div>
+    </div>
+  </div>
 
   <section class="container py-5">
     <!-- Our Story -->
     <div class="row g-4 align-items-center mb-5">
       <div class="col-md-6">
-        <h2 class="mb-4">Our Story</h2>
-        <div class="gold-divider mb-4"></div>
-        <p>Emily's Fashion Collections started as a small boutique in the province,
-        offering a curated selection of trendy and affordable clothing.</p>
-        <p>Over the years, we've expanded to online selling platforms such as Shopee,
-        making our items accessible to customers nationwide.</p>
-        <p>Our mission is to provide stylish apparel that suits every lifestyle—whether
-        you need casual wear for daily errands or something more formal for special
-        occasions.</p>
+        <div class="story-content reveal slide-right">
+          <h2 class="mb-4">Our Story</h2>
+          <div class="gold-divider mb-4"></div>
+          <p class="story-text">Emily's Fashion Collections started as a small boutique in the province,
+          offering a curated selection of trendy and affordable clothing.</p>
+          <p class="story-text">Over the years, we've expanded to online selling platforms such as Shopee,
+          making our items accessible to customers nationwide.</p>
+          <p class="story-text">Our mission is to provide stylish apparel that suits every lifestyle—whether
+          you need casual wear for daily errands or something more formal for special
+          occasions.</p>
+        </div>
       </div>
       <div class="col-md-6">
-        <img src="../images/about-story.jpg" alt="Fashion Store Interior" 
-             class="img-fluid rounded shadow-sm mx-auto d-block" style="max-height: 350px;" 
-             onerror="this.src='../images/logo.png'; this.style.maxHeight='200px';">
+        <div class="story-image-wrapper reveal slide-left">
+          <img src="../images/about-story.jpg" alt="Fashion Store Interior" 
+               class="img-fluid rounded shadow-lg mx-auto d-block" style="max-height: 350px;" 
+               onerror="this.src='../images/logo.png'; this.style.maxHeight='200px';">
+          <div class="image-decoration"></div>
+        </div>
       </div>
     </div>
     
     <!-- Our Values -->
-    <div class="row mb-5 py-3">
-      <div class="col-12 text-center mb-4">
+    <div class="row mb-5 py-5 values-section">
+      <div class="col-12 text-center mb-4 reveal fade-in">
         <h2>Our Values</h2>
         <div class="gold-divider mx-auto mb-4"></div>
+        <p class="values-intro mb-5">The principles that guide every piece we create and every customer interaction we have</p>
       </div>
-      <div class="col-md-4 mb-3 mb-md-0">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <div class="value-icon mb-3">
-              <i class="fas fa-heart fa-2x text-purple"></i>
-            </div>
-            <h4 class="card-title">Quality</h4>
-            <p class="card-text">We carefully select fabrics and materials to ensure comfort and durability.</p>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="value-card reveal fade-in delay-1">
+          <div class="value-icon-wrapper mb-4">
+            <i class="fas fa-heart text-purple"></i>
           </div>
+          <h4 class="value-title">Quality</h4>
+          <p class="value-text">We carefully select fabrics and materials to ensure comfort and durability.</p>
+          <div class="value-hover-effect"></div>
         </div>
       </div>
-      <div class="col-md-4 mb-3 mb-md-0">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <div class="value-icon mb-3">
-              <i class="fas fa-gem fa-2x text-purple"></i>
-            </div>
-            <h4 class="card-title">Style</h4>
-            <p class="card-text">Every piece is thoughtfully designed to keep you on trend while remaining timeless.</p>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="value-card reveal fade-in delay-2">
+          <div class="value-icon-wrapper mb-4">
+            <i class="fas fa-gem text-purple"></i>
           </div>
+          <h4 class="value-title">Style</h4>
+          <p class="value-text">Every piece is thoughtfully designed to keep you on trend while remaining timeless.</p>
+          <div class="value-hover-effect"></div>
         </div>
       </div>
-      <div class="col-md-4 mb-3 mb-md-0">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <div class="value-icon mb-3">
-              <i class="fas fa-star fa-2x text-purple"></i>
-            </div>
-            <h4 class="card-title">Accessibility</h4>
-            <p class="card-text">We believe fashion should be affordable without compromising on quality.</p>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="value-card reveal fade-in delay-3">
+          <div class="value-icon-wrapper mb-4">
+            <i class="fas fa-star text-purple"></i>
           </div>
+          <h4 class="value-title">Accessibility</h4>
+          <p class="value-text">We believe fashion should be affordable without compromising on quality.</p>
+          <div class="value-hover-effect"></div>
         </div>
       </div>
     </div>
 
     <!-- Size Chart with improved styling -->
-    <div class="size-chart-section py-3 mb-5 rounded p-4">
+    <div class="size-chart-section py-5 mb-5 rounded p-4 reveal fade-in">
       <div class="row">
         <div class="col-12 text-center mb-4">
           <h2>Size Chart</h2>
@@ -139,8 +153,8 @@
           <p class="mb-4">Use our size chart to find your perfect fit. Measurements are in inches.</p>
         </div>
       </div>
-      <div class="table-responsive">
-        <table class="table table-bordered align-middle">
+      <div class="table-responsive size-chart-container">
+        <table class="table table-bordered align-middle size-table">
           <thead class="bg-purple text-white">
             <tr>
               <th>Size</th>
@@ -150,25 +164,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="size-row">
               <td class="fw-bold">Small (S)</td>
               <td>32-34</td>
               <td>24-26</td>
               <td>34-36</td>
             </tr>
-            <tr>
+            <tr class="size-row">
               <td class="fw-bold">Medium (M)</td>
               <td>34-36</td>
               <td>26-28</td>
               <td>36-38</td>
             </tr>
-            <tr>
+            <tr class="size-row">
               <td class="fw-bold">Large (L)</td>
               <td>36-38</td>
               <td>28-30</td>
               <td>38-40</td>
             </tr>
-            <tr>
+            <tr class="size-row">
               <td class="fw-bold">X-Large (XL)</td>
               <td>38-40</td>
               <td>30-32</td>
@@ -183,6 +197,17 @@
         <i class="fas fa-hand-point-right me-2"></i>
         <small>Swipe horizontally to view the complete size chart.</small>
       </div>
+      
+      <!-- Size guide tips -->
+      <div class="size-tips mt-4 p-3 reveal fade-in delay-2">
+        <h5><i class="fas fa-tape me-2 text-gold"></i> Measuring Tips</h5>
+        <ul class="size-tips-list">
+          <li>Use a soft measuring tape for accuracy</li>
+          <li>For bust measurement, measure at the fullest point</li>
+          <li>Measure your natural waistline (smallest part)</li>
+          <li>For hips, measure at the widest point</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -190,7 +215,7 @@
   <footer class="bg-purple text-white py-5 mt-auto">
     <div class="container">
       <!-- Footer Top: Logo and Tagline -->
-      <div class="footer-top text-center mb-4">
+      <div class="footer-top text-center mb-4 reveal">
         <h3 class="mb-2">Emily's Fashion Collections</h3>
         <p class="mb-0">Trendy and Affordable Clothes for Everyone</p>
         <div class="gold-divider mx-auto my-4"></div>
@@ -199,38 +224,39 @@
       <!-- Footer Main Content -->
       <div class="row g-4">
         <!-- Company Info -->
-        <div class="col-md-4 mb-4 mb-md-0">
+        <div class="col-md-6 mb-4 mb-md-0 reveal delay-1">
           <h5 class="footer-heading">About Us</h5>
           <p class="footer-text">Emily's Fashion Collections offers curated fashion pieces that blend style, comfort, and affordability. We believe everyone deserves to look and feel their best.</p>
           <div class="social-icons mt-3">
-            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="social-icon" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon reveal-hover" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
           </div>
         </div>
         
-        <!-- Quick Links -->
-        <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="footer-heading">Quick Links</h5>
-          <ul class="footer-links">
-            <li><a href="main.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="https://shopee.ph/emilysamosino" target="_blank">Shopee Store</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
+        <!-- Quick Links Section REMOVED -->
         
         <!-- Newsletter -->
-        <div class="col-md-4">
+        <div class="col-md-6 reveal delay-3">
           <h5 class="footer-heading">Stay Updated</h5>
           <p class="footer-text">Subscribe to our newsletter for exclusive offers and updates.</p>
           <div class="newsletter-form mt-3">
-            <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Your email address" aria-label="Email address">
-              <button class="btn btn-gold" type="button">Subscribe</button>
-            </div>
+            <form id="newsletter-form">
+              <div class="input-group mb-2">
+                <input type="email" class="form-control reveal-input" id="newsletter-email" placeholder="Your email address" aria-label="Email address" required>
+                <button class="btn btn-gold reveal-btn" type="submit" id="newsletter-submit">
+                  <span id="button-text">Subscribe</span>
+                  <span id="button-loading" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="form-feedback mt-2">
+                <div id="newsletter-success" class="text-success small d-none">Thank you! You've been subscribed successfully.</div>
+                <div id="newsletter-error" class="text-warning small d-none">Something went wrong. Please try again.</div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -240,10 +266,10 @@
     <div class="footer-bottom mt-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 text-center text-md-start">
+          <div class="col-md-6 text-center text-md-start reveal delay-4">
             <p class="mb-0">&copy; 2025 Emily's Fashion Collections. All rights reserved.</p>
           </div>
-          <div class="col-md-6 text-center text-md-end">
+          <div class="col-md-6 text-center text-md-end reveal delay-4">
             <p class="mb-0">Designed with <i class="fas fa-heart text-gold"></i> by Samosino</p>
           </div>
         </div>
@@ -265,6 +291,35 @@
         if (link.getAttribute('href') === currentPage) {
           link.classList.add('active');
         }
+      });
+      
+      // Reveal animations when elements come into view
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      function checkReveal() {
+        revealElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          if (elementTop < windowHeight - 50) {
+            element.classList.add('active');
+          }
+        });
+      }
+      
+      // Check elements on initial load
+      checkReveal();
+      
+      // Check elements on scroll
+      window.addEventListener('scroll', checkReveal);
+      
+      // Size row hover effect
+      document.querySelectorAll('.size-row').forEach(row => {
+        row.addEventListener('mouseenter', function() {
+          this.classList.add('highlight-row');
+        });
+        row.addEventListener('mouseleave', function() {
+          this.classList.remove('highlight-row');
+        });
       });
     });
   </script>
